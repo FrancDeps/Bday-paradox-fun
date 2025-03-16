@@ -1,0 +1,214 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN4G/roQ/YSuCspslTZCxuz",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/FrancDeps/Bday-paradox-fun/blob/main/Foodcalculator\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 10,
+      "metadata": {
+        "id": "eToYEmHuMNh9",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "0e7fcad3-c22f-48ca-866f-1c8d4e2a6ca1"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "2025-03-16 22:37:17.561 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.563 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.564 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.566 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.567 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.569 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.570 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.571 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.573 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.573 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.575 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.576 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.577 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.578 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.579 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.580 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.581 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.582 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.584 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.585 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.585 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:37:17.586 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "import streamlit as st\n",
+        "\n",
+        "  # Importa la libreria Streamlit per creare l'interfaccia grafica\n",
+        "\n",
+        "# Dizionario con valori nutrizionali per 100g di alimento\n",
+        "nutritional_data = {\n",
+        "    \"pollo\": {\"calorie\": 165, \"proteine\": 31, \"carboidrati\": 0, \"grassi\": 3.6},\n",
+        "    \"riso\": {\"calorie\": 130, \"proteine\": 2.7, \"carboidrati\": 28, \"grassi\": 0.3},\n",
+        "    \"mela\": {\"calorie\": 52, \"proteine\": 0.3, \"carboidrati\": 14, \"grassi\": 0.2},\n",
+        "    \"pane\": {\"calorie\": 265, \"proteine\": 9, \"carboidrati\": 49, \"grassi\": 3.2}\n",
+        "}\n",
+        "\n",
+        "# Funzione per calcolare i valori nutrizionali in base al peso inserito\n",
+        "def calcola_macronutrienti(alimento, grammi):\n",
+        "    if alimento in nutritional_data:\n",
+        "        valori = nutritional_data[alimento]\n",
+        "        calorie = (valori[\"calorie\"] / 100) * grammi  # Calcolo delle calorie\n",
+        "        proteine = (valori[\"proteine\"] / 100) * grammi  # Calcolo delle proteine\n",
+        "        carboidrati = (valori[\"carboidrati\"] / 100) * grammi  # Calcolo dei carboidrati\n",
+        "        grassi = (valori[\"grassi\"] / 100) * grammi  # Calcolo dei grassi\n",
+        "\n",
+        "        return calorie, proteine, carboidrati, grassi  # Restituisce i valori calcolati\n",
+        "    else:\n",
+        "        return None  # Restituisce None se l'alimento non è nel database\n",
+        "\n",
+        "# Creazione dell'interfaccia utente con Streamlit\n",
+        "st.title(\"Calcolatore Nutrizionale\")  # Titolo dell'applicazione\n",
+        "\n",
+        "# Lista di alimenti consumati\n",
+        "dieta_giornaliera = {\n",
+        "    \"pollo\": 100,\n",
+        "    \"riso\": 50,\n",
+        "    \"mela\": 200\n",
+        "}\n",
+        "\n",
+        "tot_calorie, tot_proteine, tot_carboidrati, tot_grassi = 0, 0, 0, 0\n",
+        "\n",
+        "# Calcolo totale per tutti gli alimenti registrati\n",
+        "for alimento, grammi in dieta_giornaliera.items():\n",
+        "    valori = calcola_macronutrienti(alimento, grammi)\n",
+        "    if valori:\n",
+        "        calorie, proteine, carboidrati, grassi = valori\n",
+        "        tot_calorie += calorie\n",
+        "        tot_proteine += proteine\n",
+        "        tot_carboidrati += carboidrati\n",
+        "        tot_grassi += grassi\n",
+        "\n",
+        "# Mostra i risultati totali all'utente\n",
+        "st.write(\"### Valori nutrizionali totali per la giornata:\")\n",
+        "st.write(f\"- **Calorie:** {tot_calorie:.2f} kcal\")\n",
+        "st.write(f\"- **Proteine:** {tot_proteine:.2f} g\")\n",
+        "st.write(f\"- **Carboidrati:** {tot_carboidrati:.2f} g\")\n",
+        "st.write(f\"- **Grassi:** {tot_grassi:.2f} g\")\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import streamlit as st\n",
+        "nutritional_data = {\n",
+        "    \"pollo\": {\"calorie\": 165, \"proteine\": 31, \"carboidrati\": 0, \"grassi\": 3.6},\n",
+        "    \"riso\": {\"calorie\": 130, \"proteine\": 2.7, \"carboidrati\": 28, \"grassi\": 0.3},\n",
+        "    \"mela\": {\"calorie\": 52, \"proteine\": 0.3, \"carboidrati\": 14, \"grassi\": 0.2},\n",
+        "    \"pane\": {\"calorie\": 265, \"proteine\": 9, \"carboidrati\": 49, \"grassi\": 3.2}\n",
+        "}\n",
+        "def calcola_macronutrienti(alimento, grammi):\n",
+        "    if alimento in nutritional_data:\n",
+        "        valori = nutritional_data[alimento]\n",
+        "        calorie = (valori[\"calorie\"] / 100) * grammi  # Calcolo delle calorie\n",
+        "        proteine = (valori[\"proteine\"] / 100) * grammi  # Calcolo delle proteine\n",
+        "        carboidrati = (valori[\"carboidrati\"] / 100) * grammi  # Calcolo dei carboidrati\n",
+        "        grassi = (valori[\"grassi\"] / 100) * grammi  # Calcolo dei grassi\n",
+        "\n",
+        "        return calorie, proteine, carboidrati, grassi  # Restituisce i valori calcolati\n",
+        "    else:\n",
+        "        return None\n",
+        "st.title(\"Calcolatore Nutrizionale\")\n",
+        "# Lista di alimenti consumati\n",
+        "dieta_giornaliera = {\n",
+        "    \"pollo\": 100,\n",
+        "    \"riso\": 50,\n",
+        "    \"mela\": 200\n",
+        "}\n",
+        "\n",
+        "tot_calorie, tot_proteine, tot_carboidrati, tot_grassi = 0, 0, 0, 0\n",
+        "\n",
+        "# Calcolo totale per tutti gli alimenti registrati\n",
+        "for alimento, grammi in dieta_giornaliera.items():\n",
+        "    valori = calcola_macronutrienti(alimento, grammi)\n",
+        "    if valori:\n",
+        "        calorie, proteine, carboidrati, grassi = valori\n",
+        "        tot_calorie += calorie\n",
+        "        tot_proteine += proteine\n",
+        "        tot_carboidrati += carboidrati\n",
+        "        tot_grassi += grassi\n",
+        "\n",
+        "# Mostra i risultati totali all'utente\n",
+        "st.write(\"### Valori nutrizionali totali per la giornata:\")\n",
+        "st.write(f\"- **Calorie:** {tot_calorie:.2f} kcal\")\n",
+        "st.write(f\"- **Proteine:** {tot_proteine:.2f} g\")\n",
+        "st.write(f\"- **Carboidrati:** {tot_carboidrati:.2f} g\")\n",
+        "st.write(f\"- **Grassi:** {tot_grassi:.2f} g\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "5UoFKn-rGZnA",
+        "outputId": "c21a06e9-8541-4ed5-f40e-9c134e5c5f5a"
+      },
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "2025-03-16 22:40:13.789 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.791 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.793 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.794 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.795 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.796 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.798 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.799 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.800 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.801 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.802 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.803 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.804 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.805 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.806 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.807 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.808 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.809 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.810 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.810 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.811 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-03-16 22:40:13.812 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
